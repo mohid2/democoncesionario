@@ -6,7 +6,7 @@ import lombok.*;
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor @ToString @Builder
 @Entity
 @Table(name = "marca_coche")
-public class MarcaCocheEntity {
+public class CarBrandEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
