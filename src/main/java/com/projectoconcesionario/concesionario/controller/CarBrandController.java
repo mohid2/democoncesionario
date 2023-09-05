@@ -17,15 +17,30 @@ public class CarBrandController {
     private final ICarBrandService iCarBrandService;
 
 
+    /**
+     * Devuelve una lista de todas las marcas coche que hay en la base de datos
+     * @return un lista CarBrandDTO
+     */
     @GetMapping("/marcas")
     public ResponseEntity<List<CarBrandDTO>> getAll() {
         return ResponseEntity.ok(iCarBrandService.getAll());
     }
 
+    /**
+     * devuelve una marca coche dado su id
+     * @param id id de la marca coche a buscar
+     * @return una marca coche CarBrandDTO
+     */
     @GetMapping("/marcas/{id}")
     public ResponseEntity<CarBrandDTO> getCarBrand(@PathVariable Integer id) {
        return ResponseEntity.of(iCarBrandService.getCarBrand(id));
     }
+
+    /**
+     * Crear una nueva marca coche si no existe
+     * @param carBrandDTO marca coche a guardar
+     * @return marca coche guardada y un bad request si algo falla
+     */
     @PostMapping("/marcas")
     public ResponseEntity<CarBrandDTO> saveCarBrand(@RequestBody CarBrandDTO carBrandDTO ){
         try {
@@ -34,5 +49,27 @@ public class CarBrandController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
-    //public ResponseEntity<Boolean>  deleteCarBrand(Integer id){}
+
+    /**
+     * Actualizar una marca coche si existe
+     * @param carBrandDTO marca coche a actualizar
+     * @return un status ok,marca coche actualizada  y si no un not found
+     */
+    @PutMapping("/marcas")
+    public ResponseEntity<CarBrandDTO> updateCarBrand(@RequestBody CarBrandDTO carBrandDTO ){
+        if(iCarBrandService.getCarBrand(carBrandDTO.getId()).isPresent()){
+            return ResponseEntity.status(HttpStatus.OK).body(iCarBrandService.saveCarBrand(carBrandDTO));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    /**
+     * Borrar una marca coche si existe
+     * @param id id de la marca coche a borrar
+     * @return una boolean si se ha borrado o no
+     */
+    @DeleteMapping("/marcas/{id}")
+    public ResponseEntity<?>  deleteCarBrand(@PathVariable Integer id){
+        return new ResponseEntity<>(iCarBrandService.deleteCarBrand(id) ? HttpStatus.OK:HttpStatus.NOT_FOUND);
+    }
 }

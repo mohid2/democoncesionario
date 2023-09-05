@@ -2,6 +2,7 @@ package com.projectoconcesionario.concesionario.persistance.repository;
 
 import com.projectoconcesionario.concesionario.domain.dto.CarBrandDTO;
 import com.projectoconcesionario.concesionario.domain.repository.ICarBrandCrudRepository;
+import com.projectoconcesionario.concesionario.persistance.entity.CarBrandEntity;
 import com.projectoconcesionario.concesionario.persistance.mapper.ICarBrandMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -26,10 +27,15 @@ public class CarBrandRepository implements ICarBrandCrudRepository {
     }
 
     @Override
+    public Optional<CarBrandDTO> getCarBrandByDescription(String description) {
+        return iCarBrandRepository.findByDescription(description).map(iCarBrandMapper::carBrandEntityToCarBrandDTO);
+    }
+
+    @Override
     public CarBrandDTO saveCarBrand(CarBrandDTO carBrandDTO) {
-        return iCarBrandMapper.carBrandEntityToCarBrandDTO(
-                iCarBrandRepository.save(
-                        iCarBrandMapper.carBrandDTOToCarBrandEntity(carBrandDTO)));
+        var carBrandEntity= iCarBrandMapper.carBrandDTOToCarBrandEntity(carBrandDTO);
+        carBrandEntity = iCarBrandRepository.save(carBrandEntity);
+        return iCarBrandMapper.carBrandEntityToCarBrandDTO(carBrandEntity);
     }
 
     @Override

@@ -20,12 +20,16 @@ public interface ICarBrandService {
 
     Optional<CarBrandDTO> getCarBrand(Integer id);
 
+    Optional<CarBrandDTO> getCarBrandByDescription(String description);
+
     /**
      * Guardar y actualiza marca coche
      * @param carBrandDTO marca coche a Guardar o actualiza
      * @return marca coche  Guardada o actualizada
      */
     CarBrandDTO saveCarBrand(CarBrandDTO carBrandDTO );
+
+
 
     /**
      * Elimina una marca coche dada su id

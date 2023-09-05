@@ -3,6 +3,7 @@ package com.projectoconcesionario.concesionario.domain.service.impl;
 import com.projectoconcesionario.concesionario.domain.dto.CarBrandDTO;
 import com.projectoconcesionario.concesionario.domain.repository.ICarBrandCrudRepository;
 import com.projectoconcesionario.concesionario.domain.service.ICarBrandService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
+@Transactional
 @Service
 public class CarBrandServiceImpl implements ICarBrandService {
 
@@ -25,17 +27,22 @@ public class CarBrandServiceImpl implements ICarBrandService {
     }
 
     @Override
+    public Optional<CarBrandDTO> getCarBrandByDescription(String description) {
+        return iCarBrandCrudRepository.getCarBrandByDescription(description);
+    }
+
+    @Override
     public CarBrandDTO saveCarBrand(CarBrandDTO carBrandDTO) {
         return iCarBrandCrudRepository.saveCarBrand(carBrandDTO);
     }
 
+
     @Override
     public boolean deleteCarBrand(Integer id) {
-        try {
-            iCarBrandCrudRepository.deleteCarBrand(id);
-            return true;
-        }catch (Exception e){
-            return false;
-        }
+         if(getCarBrand(id).isPresent()){
+             iCarBrandCrudRepository.deleteCarBrand(id);
+             return true;
+         }
+         return false;
     }
 }

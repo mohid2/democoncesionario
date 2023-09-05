@@ -10,6 +10,6 @@ public class CarBrandEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "descripcion")
+    @Column(name = "descripcion",unique = true)
     private String description;
 }
