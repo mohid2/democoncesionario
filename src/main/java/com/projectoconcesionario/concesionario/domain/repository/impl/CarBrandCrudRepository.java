@@ -1,9 +1,9 @@
-package com.projectoconcesionario.concesionario.persistance.repository;
+package com.projectoconcesionario.concesionario.domain.repository.impl;
 
 import com.projectoconcesionario.concesionario.domain.dto.CarBrandDTO;
 import com.projectoconcesionario.concesionario.domain.repository.ICarBrandCrudRepository;
-import com.projectoconcesionario.concesionario.persistance.entity.CarBrandEntity;
 import com.projectoconcesionario.concesionario.persistance.mapper.ICarBrandMapper;
+import com.projectoconcesionario.concesionario.persistance.repository.ICarBrandRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 @RequiredArgsConstructor
 @Repository
-public class CarBrandRepository implements ICarBrandCrudRepository {
+public class CarBrandCrudRepository implements ICarBrandCrudRepository {
 
     private final ICarBrandRepository iCarBrandRepository;
     private final ICarBrandMapper iCarBrandMapper;

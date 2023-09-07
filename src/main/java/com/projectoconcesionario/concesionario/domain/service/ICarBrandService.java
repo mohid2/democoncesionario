@@ -17,10 +17,8 @@ public interface ICarBrandService {
      * @param id id marca coche que es de tipo Integer
      * @return Optional de marca coche encontrado
      */
-
     Optional<CarBrandDTO> getCarBrand(Integer id);
 
-    Optional<CarBrandDTO> getCarBrandByDescription(String description);
 
     /**
      * Guardar y actualiza marca coche

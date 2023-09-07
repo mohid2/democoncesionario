@@ -13,33 +13,33 @@ import java.util.List;
 public interface ICarBrandMapper {
     /**
      * convierte una CarBrandEntity a una CarBrandDTO
-     * @param carBrandEntity  CarBrandEntity
-     * @return  CarBrandEntity
+     * @param carBrandEntity de tipo CarBrandEntity
+     * @return  CarBrandDTO
      */
-// Esta annotation si los atributos de la entity y el dto. Se llaman igual se puede omitir
+     // Esta annotation si los atributos de la entity y el dto. Se llaman igual se puede omitir
     @Mapping(source = "id",target = "id")
     @Mapping(source = "description",target = "description")
     CarBrandDTO carBrandEntityToCarBrandDTO(CarBrandEntity carBrandEntity);
 
     /**
      * convierte una  CarBrandDTO a una CarBrandEntity
-     * @param carBrandDTO CarBrandDTO
-     * @return  CarBrandDTO
+     * @param carBrandDTO de tipo CarBrandDTO
+     * @return  CarBrandEntity
      */
     @InheritInverseConfiguration
     CarBrandEntity carBrandDTOToCarBrandEntity(CarBrandDTO carBrandDTO);
 
     /**
      * transformar una lista de tipo CarBrandEntity a una lista CarBrandDTO
-     * @param carsBrandEntities tipo lista a transformar
-     * @return  CarBrandDTO tipo lista transformada
+     * @param carsBrandEntities lista a transformar de tipo CarBrandEntity
+     * @return una lista de tipo  CarBrandDTO
      */
     List<CarBrandDTO> carsBrandEntityToCarsBrandDTO(List<CarBrandEntity> carsBrandEntities);
 
     /**
      * transformar una lista de tipo CarBrandDTO  a una lista CarBrandEntity
-     * @param carsBrandDTO tipo lista a transformar
-     * @return  CarBrandEntity tipo lista transformada
+     * @param carsBrandDTO  lista a transformar de tipo CarBrandDTO
+     * @return una lista de tipo CarBrandEntity
      */
     List<CarBrandEntity> carsBrandDTOToCarsBrandEntity(List<CarBrandDTO> carsBrandDTO);
 }
