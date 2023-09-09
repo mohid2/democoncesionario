@@ -1,7 +1,7 @@
 package com.projectoconcesionario.concesionario.domain.repository.impl;
 
 import com.projectoconcesionario.concesionario.domain.dto.CustomerDTO;
-import com.projectoconcesionario.concesionario.domain.repository.ICustomerCrudRepository;
+import com.projectoconcesionario.concesionario.domain.repository.ICustomerDtoRepository;
 import com.projectoconcesionario.concesionario.persistance.entity.CustomerEntity;
 import com.projectoconcesionario.concesionario.persistance.mapper.ICustomerMapper;
 import com.projectoconcesionario.concesionario.persistance.repository.ICustomerRepository;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 @RequiredArgsConstructor
 @Repository
-public class CustomerCrudRepository implements ICustomerCrudRepository {
+public class CustomerDtoRepository implements ICustomerDtoRepository {
 
     private final ICustomerRepository iCustomerRepository;
     private final ICustomerMapper iCustomerMapper;

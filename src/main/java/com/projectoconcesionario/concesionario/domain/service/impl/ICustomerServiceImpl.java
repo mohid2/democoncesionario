@@ -2,7 +2,7 @@ package com.projectoconcesionario.concesionario.domain.service.impl;
 
 import com.projectoconcesionario.concesionario.domain.dto.CustomerDTO;
 import com.projectoconcesionario.concesionario.domain.dto.response.CustomerResponseDto;
-import com.projectoconcesionario.concesionario.domain.repository.ICustomerCrudRepository;
+import com.projectoconcesionario.concesionario.domain.repository.ICustomerDtoRepository;
 import com.projectoconcesionario.concesionario.domain.service.ICustomerService;
 import com.projectoconcesionario.concesionario.exception.EmailException;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class ICustomerServiceImpl implements ICustomerService {
 
-    private final ICustomerCrudRepository iCustomerCrudRepository;
+    private final ICustomerDtoRepository iCustomerDtoRepository;
 
     private static final String VALIDAREMAIL= "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@".concat("[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
@@ -25,7 +25,7 @@ public class ICustomerServiceImpl implements ICustomerService {
      */
     @Override
     public List<CustomerDTO> getAll() {
-        return iCustomerCrudRepository.getAll();
+        return iCustomerDtoRepository.getAll();
     }
 
     /**
@@ -35,7 +35,7 @@ public class ICustomerServiceImpl implements ICustomerService {
      */
     @Override
     public Optional<CustomerDTO> getCustomerDTO(String dni) {
-        return iCustomerCrudRepository.getCustomerDTO(dni);
+        return iCustomerDtoRepository.getCustomerDTO(dni);
     }
 
     /**
@@ -45,7 +45,7 @@ public class ICustomerServiceImpl implements ICustomerService {
      */
     @Override
     public Optional<CustomerDTO> getCustomerDTOByEmail(String email) {
-        return iCustomerCrudRepository.getCustomerDTOByEmail(email);
+        return iCustomerDtoRepository.getCustomerDTOByEmail(email);
     }
 
     /**
@@ -60,7 +60,7 @@ public class ICustomerServiceImpl implements ICustomerService {
         if(!customerDTO.getEmail().matches(VALIDAREMAIL)){
             throw new EmailException();
         }
-        var customerResponseDto = iCustomerCrudRepository.saveCustomerDTO(customerDTO);
+        var customerResponseDto = iCustomerDtoRepository.saveCustomerDTO(customerDTO);
         return new CustomerResponseDto(customerResponseDto.getPassword());
     }
 
@@ -72,8 +72,8 @@ public class ICustomerServiceImpl implements ICustomerService {
 
     @Override
     public Optional<CustomerDTO>  updateCustomerDTO(CustomerDTO customerDTO) {
-        if(iCustomerCrudRepository.getCustomerDTO(customerDTO.getDni()).isPresent()){
-            return Optional.of(iCustomerCrudRepository.saveCustomerDTO(customerDTO));
+        if(iCustomerDtoRepository.getCustomerDTO(customerDTO.getDni()).isPresent()){
+            return Optional.of(iCustomerDtoRepository.saveCustomerDTO(customerDTO));
         }
         return Optional.empty();
     }
@@ -86,7 +86,7 @@ public class ICustomerServiceImpl implements ICustomerService {
     @Override
     public boolean deleteCustomerDTO(String dni) {
         if(getCustomerDTO(dni).isPresent()){
-            iCustomerCrudRepository.deleteCustomerDTO(dni);
+            iCustomerDtoRepository.deleteCustomerDTO(dni);
             return true;
         }
         return false;

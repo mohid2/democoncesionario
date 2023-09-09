@@ -5,7 +5,7 @@ import com.projectoconcesionario.concesionario.domain.dto.CarBrandDTO;
 import java.util.List;
 import java.util.Optional;
 
-public interface ICarBrandCrudRepository {
+public interface ICarBrandDtoRepository {
 
     /**
      * Devuelve un lista de marca coches

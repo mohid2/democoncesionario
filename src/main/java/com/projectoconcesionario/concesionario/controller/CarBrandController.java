@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/marcas")
 @RestController
 public class CarBrandController {
     private final ICarBrandService iCarBrandService;
@@ -21,7 +21,7 @@ public class CarBrandController {
      * Devuelve una lista de todas las marcas coche que hay en la base de datos
      * @return un lista CarBrandDTO
      */
-    @GetMapping("/marcas")
+    @GetMapping
     public ResponseEntity<List<CarBrandDTO>> getAll() {
         return ResponseEntity.ok(iCarBrandService.getAll());
     }
@@ -31,7 +31,7 @@ public class CarBrandController {
      * @param id id de la marca coche a buscar
      * @return una marca coche CarBrandDTO
      */
-    @GetMapping("/marcas/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<CarBrandDTO> getCarBrand(@PathVariable Integer id) {
        return ResponseEntity.of(iCarBrandService.getCarBrand(id));
     }
@@ -41,7 +41,7 @@ public class CarBrandController {
      * @param carBrandDTO marca coche a guardar
      * @return marca coche guardada y un bad request si algo falla
      */
-    @PostMapping("/marcas")
+    @PostMapping
     public ResponseEntity<CarBrandDTO> saveCarBrand(@RequestBody CarBrandDTO carBrandDTO ){
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(iCarBrandService.saveCarBrand(carBrandDTO));
@@ -55,7 +55,7 @@ public class CarBrandController {
      * @param carBrandDTO marca coche a actualizar
      * @return un status ok,marca coche actualizada  y si no un not found
      */
-    @PutMapping("/marcas")
+    @PutMapping()
     public ResponseEntity<CarBrandDTO> updateCarBrand(@RequestBody CarBrandDTO carBrandDTO ){
         if(iCarBrandService.getCarBrand(carBrandDTO.getId()).isPresent()){
             return ResponseEntity.status(HttpStatus.OK).body(iCarBrandService.saveCarBrand(carBrandDTO));
@@ -68,7 +68,7 @@ public class CarBrandController {
      * @param id id de la marca coche a borrar
      * @return una boolean si se ha borrado o no
      */
-    @DeleteMapping("/marcas/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?>  deleteCarBrand(@PathVariable Integer id){
         return new ResponseEntity<>(iCarBrandService.deleteCarBrand(id) ? HttpStatus.OK:HttpStatus.NOT_FOUND);
     }

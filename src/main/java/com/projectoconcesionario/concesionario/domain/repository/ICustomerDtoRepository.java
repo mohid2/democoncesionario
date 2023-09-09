@@ -5,7 +5,7 @@ import com.projectoconcesionario.concesionario.domain.dto.CustomerDTO;
 import java.util.List;
 import java.util.Optional;
 
-public interface ICustomerCrudRepository {
+public interface ICustomerDtoRepository {
     /**
      * Devuelve un lista de clientesDto
      * @return lista clientes

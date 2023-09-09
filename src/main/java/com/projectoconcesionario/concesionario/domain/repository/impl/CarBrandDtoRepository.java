@@ -1,7 +1,7 @@
 package com.projectoconcesionario.concesionario.domain.repository.impl;
 
 import com.projectoconcesionario.concesionario.domain.dto.CarBrandDTO;
-import com.projectoconcesionario.concesionario.domain.repository.ICarBrandCrudRepository;
+import com.projectoconcesionario.concesionario.domain.repository.ICarBrandDtoRepository;
 import com.projectoconcesionario.concesionario.persistance.mapper.ICarBrandMapper;
 import com.projectoconcesionario.concesionario.persistance.repository.ICarBrandRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 @RequiredArgsConstructor
 @Repository
-public class CarBrandCrudRepository implements ICarBrandCrudRepository {
+public class CarBrandDtoRepository implements ICarBrandDtoRepository {
 
     private final ICarBrandRepository iCarBrandRepository;
     private final ICarBrandMapper iCarBrandMapper;

@@ -1,0 +1,47 @@
+package com.projectoconcesionario.concesionario.persistance.mapper;
+
+import com.projectoconcesionario.concesionario.domain.dto.CarBrandDTO;
+import com.projectoconcesionario.concesionario.domain.dto.CarDTO;
+import com.projectoconcesionario.concesionario.persistance.entity.CarBrandEntity;
+import com.projectoconcesionario.concesionario.persistance.entity.CarEntity;
+import org.mapstruct.InheritInverseConfiguration;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+
+import java.util.List;
+
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+public interface ICarMapper {
+    /**
+     * convierte una CarBrandEntity a una CarBrandDTO
+     * @param carEntity de tipo CarBrandEntity
+     * @return  CarBrandDTO
+     */
+    // Esta annotation si los atributos de la entity y el dto. Se llaman igual se puede omitir
+    CarDTO carEntityToCarDTO(CarEntity carEntity);
+
+    /**
+     * convierte una  CarBrandDTO a una CarBrandEntity
+     * @param carDTO de tipo CarBrandDTO
+     * @return  CarBrandEntity
+     */
+    @Mapping(target = "carBrandEntity",ignore = true)
+    @InheritInverseConfiguration
+    CarEntity carDTOToCarEntity(CarDTO carDTO);
+
+    /**
+     * transformar una lista de tipo CarBrandEntity a una lista CarBrandDTO
+     * @param carEntities lista a transformar de tipo CarBrandEntity
+     * @return una lista de tipo  CarBrandDTO
+     */
+    List<CarDTO> carsEntityToCarsDTO(List<CarEntity> carEntities);
+
+    /**
+     * transformar una lista de tipo CarBrandDTO  a una lista CarBrandEntity
+     * @param carsDTO  lista a transformar de tipo CarBrandDTO
+     * @return una lista de tipo CarBrandEntity
+     */
+    List<CarEntity> carsDTOToCarsEntity(List<CarDTO> carsDTO);
+
+}

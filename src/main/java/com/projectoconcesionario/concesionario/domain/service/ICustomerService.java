@@ -35,6 +35,12 @@ public interface ICustomerService {
      * @return cliente  Guardada o actualizada
      */
     CustomerResponseDto saveCustomerDTO(CustomerDTO customerDTO );
+
+    /**
+     *
+     * @param customerDTO
+     * @return
+     */
     Optional<CustomerDTO>  updateCustomerDTO(CustomerDTO customerDTO );
 
     /**

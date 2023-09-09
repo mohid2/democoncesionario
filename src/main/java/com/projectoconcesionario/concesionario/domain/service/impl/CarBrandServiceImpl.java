@@ -1,7 +1,7 @@
 package com.projectoconcesionario.concesionario.domain.service.impl;
 
 import com.projectoconcesionario.concesionario.domain.dto.CarBrandDTO;
-import com.projectoconcesionario.concesionario.domain.repository.ICarBrandCrudRepository;
+import com.projectoconcesionario.concesionario.domain.repository.ICarBrandDtoRepository;
 import com.projectoconcesionario.concesionario.domain.service.ICarBrandService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class CarBrandServiceImpl implements ICarBrandService {
 
-    private final ICarBrandCrudRepository iCarBrandCrudRepository;
+    private final ICarBrandDtoRepository iCarBrandDtoRepository;
 
     /**
      * Devuelve un lista de marca coches
@@ -23,7 +23,7 @@ public class CarBrandServiceImpl implements ICarBrandService {
      */
     @Override
     public List<CarBrandDTO> getAll() {
-        return iCarBrandCrudRepository.getAll();
+        return iCarBrandDtoRepository.getAll();
     }
 
     /**
@@ -33,7 +33,7 @@ public class CarBrandServiceImpl implements ICarBrandService {
      */
     @Override
     public Optional<CarBrandDTO> getCarBrand(Integer id) {
-        return iCarBrandCrudRepository.getCarBrand(id);
+        return iCarBrandDtoRepository.getCarBrand(id);
     }
 
     /**
@@ -43,7 +43,7 @@ public class CarBrandServiceImpl implements ICarBrandService {
      */
     @Override
     public CarBrandDTO saveCarBrand(CarBrandDTO carBrandDTO) {
-        return iCarBrandCrudRepository.saveCarBrand(carBrandDTO);
+        return iCarBrandDtoRepository.saveCarBrand(carBrandDTO);
     }
 
 
@@ -55,7 +55,7 @@ public class CarBrandServiceImpl implements ICarBrandService {
     @Override
     public boolean deleteCarBrand(Integer id) {
          if(getCarBrand(id).isPresent()){
-             iCarBrandCrudRepository.deleteCarBrand(id);
+             iCarBrandDtoRepository.deleteCarBrand(id);
              return true;
          }
          return false;
