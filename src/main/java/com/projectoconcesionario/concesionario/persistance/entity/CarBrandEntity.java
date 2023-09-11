@@ -9,7 +9,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Builder
 @Entity
 @Table(name = "marca_coche")
@@ -21,8 +20,6 @@ public class CarBrandEntity {
     @Column(name = "descripcion", unique = true)
     private String description;
 
-    @ToString.Exclude
     @OneToMany(mappedBy = "carBrandEntity", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<CarEntity> carEntities;
-
 }

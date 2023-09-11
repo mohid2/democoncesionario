@@ -3,6 +3,8 @@ package com.projectoconcesionario.concesionario.persistance.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -23,4 +25,6 @@ public class CustomerEntity {
     private String password;
     @Column(name = "activo")
     private Integer active;
+    @OneToMany(mappedBy = "customerEntity",cascade = CascadeType.ALL)
+    private List<PurchaseEntity> purchaseEntityList;
 }

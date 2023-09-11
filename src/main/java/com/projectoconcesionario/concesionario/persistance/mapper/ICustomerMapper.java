@@ -4,6 +4,7 @@ import com.projectoconcesionario.concesionario.domain.dto.CustomerDTO;
 import com.projectoconcesionario.concesionario.persistance.entity.CustomerEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public interface ICustomerMapper {
      * @param customerDTO de tipo CustomerDTO
      * @return CustomerEntity
      */
+    @Mapping(target = "purchaseEntityList",ignore = true)
     @InheritInverseConfiguration
     CustomerEntity customerDTOToCustomerEntity(CustomerDTO customerDTO);
 

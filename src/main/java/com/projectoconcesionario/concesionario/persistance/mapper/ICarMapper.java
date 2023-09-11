@@ -18,7 +18,6 @@ public interface ICarMapper {
      * @param carEntity de tipo CarBrandEntity
      * @return  CarBrandDTO
      */
-    // Esta annotation si los atributos de la entity y el dto. Se llaman igual se puede omitir
     CarDTO carEntityToCarDTO(CarEntity carEntity);
 
     /**
@@ -27,6 +26,7 @@ public interface ICarMapper {
      * @return  CarBrandEntity
      */
     @Mapping(target = "carBrandEntity",ignore = true)
+    @Mapping(target = "carPurchaseEntityList",ignore = true)
     @InheritInverseConfiguration
     CarEntity carDTOToCarEntity(CarDTO carDTO);
 

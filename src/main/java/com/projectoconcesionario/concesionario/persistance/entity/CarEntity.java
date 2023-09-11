@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Builder
 @Getter
@@ -55,9 +56,10 @@ public class CarEntity {
     @Column(name = "ruta_imagen")
     private String imagePath;
 
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "marca_coche_id",insertable = false,updatable = false)
     private CarBrandEntity carBrandEntity;
 
+    @OneToMany(mappedBy = "carEntity",cascade = CascadeType.ALL)
+    private List<CarPurchaseEntity> carPurchaseEntityList;
 }
