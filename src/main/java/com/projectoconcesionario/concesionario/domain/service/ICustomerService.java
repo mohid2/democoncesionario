@@ -1,7 +1,7 @@
 package com.projectoconcesionario.concesionario.domain.service;
 
 import com.projectoconcesionario.concesionario.domain.dto.CustomerDTO;
-import com.projectoconcesionario.concesionario.domain.dto.response.CustomerResponseDto;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -29,12 +29,6 @@ public interface ICustomerService {
     Optional<CustomerDTO> getCustomerDTOByEmail(String email);
 
 
-    /**
-     * Guardar y actualiza marca coche
-     * @param customerDTO marca coche a Guardar o actualiza
-     * @return cliente  Guardada o actualizada
-     */
-    CustomerResponseDto saveCustomerDTO(CustomerDTO customerDTO );
 
     /**
      *

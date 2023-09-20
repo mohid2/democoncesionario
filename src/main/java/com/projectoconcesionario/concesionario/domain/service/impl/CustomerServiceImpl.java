@@ -1,23 +1,24 @@
 package com.projectoconcesionario.concesionario.domain.service.impl;
 
 import com.projectoconcesionario.concesionario.domain.dto.CustomerDTO;
-import com.projectoconcesionario.concesionario.domain.dto.response.CustomerResponseDto;
+
 import com.projectoconcesionario.concesionario.domain.repository.ICustomerDtoRepository;
 import com.projectoconcesionario.concesionario.domain.service.ICustomerService;
-import com.projectoconcesionario.concesionario.exception.EmailException;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
-import java.security.SecureRandom;
+
 import java.util.List;
 import java.util.Optional;
+
+
 @RequiredArgsConstructor
 @Service
-public class ICustomerServiceImpl implements ICustomerService {
+public class CustomerServiceImpl implements ICustomerService {
 
     private final ICustomerDtoRepository iCustomerDtoRepository;
-
-    private static final String VALIDAREMAIL= "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@".concat("[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
     /**
      * Devuelve un lista de clientesDto
@@ -48,21 +49,7 @@ public class ICustomerServiceImpl implements ICustomerService {
         return iCustomerDtoRepository.getCustomerDTOByEmail(email);
     }
 
-    /**
-     * Guardar cliente nuevo
-     * @param customerDTO cliente a Guardar
-     * @return password generado por defecto al cliente Guardada
-     */
-    @Override
-    public CustomerResponseDto saveCustomerDTO(CustomerDTO customerDTO) {
-        customerDTO.setPassword(generateRandomPassword());
-        customerDTO.setActive(1);
-        if(!customerDTO.getEmail().matches(VALIDAREMAIL)){
-            throw new EmailException();
-        }
-        var customerResponseDto = iCustomerDtoRepository.saveCustomerDTO(customerDTO);
-        return new CustomerResponseDto(customerResponseDto.getPassword());
-    }
+
 
     /**
      * Actualizar cliente
@@ -90,24 +77,5 @@ public class ICustomerServiceImpl implements ICustomerService {
             return true;
         }
         return false;
-    }
-
-    /**
-     * Generado de password por  defecto
-     * @return password generado por defecto
-     */
-    private  String generateRandomPassword()
-    {
-        final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-        SecureRandom random = new SecureRandom();
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < 10; i++)
-        {
-            int randomIndex = random.nextInt(chars.length());
-            sb.append(chars.charAt(randomIndex));
-        }
-        return sb.toString();
     }
 }

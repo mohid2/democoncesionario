@@ -6,6 +6,7 @@ import com.projectoconcesionario.concesionario.domain.service.ICustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class CustomerController {
      *
      * @return
      */
+    @PreAuthorize("hasAuthority('CUSTOMER')")
     @GetMapping("/clientes")
     public ResponseEntity<List<CustomerDTO>> getAll(){
         return ResponseEntity.ok(iCustomerService.getAll());
@@ -49,24 +51,13 @@ public class CustomerController {
     public ResponseEntity<CustomerDTO> getCustomerByEmail(@PathVariable String email){
         return ResponseEntity.of(iCustomerService.getCustomerDTOByEmail(email));
     }
-
-    /**
-     *
-     * @param customerDTO
-     * @return
-     */
-    @PostMapping("/clientes")
-    public ResponseEntity<?> saveCustomer(@RequestBody CustomerDTO customerDTO){
-        return ResponseEntity.status(HttpStatus.CREATED).body(iCustomerService.saveCustomerDTO(customerDTO));
-    }
-
-
     /**
      *
      * @param customerDTO
      * @return
      */
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/clientes")
     public ResponseEntity<CustomerDTO> updateCustomer(@RequestBody CustomerDTO customerDTO){
             return ResponseEntity.of(iCustomerService.updateCustomerDTO(customerDTO));
@@ -77,6 +68,7 @@ public class CustomerController {
      * @param dni
      * @return
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/clientes/{id}")
     public ResponseEntity<Boolean> deleteCustomer(@PathVariable(name = "id") String dni){
         return new ResponseEntity<>(iCustomerService.deleteCustomerDTO(dni) ? HttpStatus.OK : HttpStatus.NOT_FOUND);

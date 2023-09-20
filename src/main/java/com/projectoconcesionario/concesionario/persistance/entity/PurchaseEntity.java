@@ -3,7 +3,9 @@ package com.projectoconcesionario.concesionario.persistance.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.io.Serial;
+import java.io.Serializable;
+
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +16,9 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "compras")
-public class PurchaseEntity {
+public class PurchaseEntity implements Serializable {
+    @Serial
+    private static final long serialVersionUID = -3977446857948765974L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "numero_factura")
