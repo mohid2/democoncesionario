@@ -33,7 +33,7 @@ public class PurchaseEntity implements Serializable {
     private String paymentMethod;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_dni",insertable = false,updatable = false)
+    @JoinColumn(name ="cliente_dni",insertable = false,updatable = false)
     private CustomerEntity customerEntity;
 
     @OneToMany(mappedBy = "purchaseEntity",cascade = CascadeType.ALL)
