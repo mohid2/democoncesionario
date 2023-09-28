@@ -22,8 +22,10 @@ import java.util.List;
 public class CustomerEntity implements UserDetails {
     @Id
     private String dni;
-    @Column(name = "nombre_completo")
-    private String fullName;
+    @Column(name = "nombre")
+    private String firstname;
+    @Column(name = "apellido")
+    private String lastname;
     private String email;
     @Column(name = "numero_telefono")
     private String phoneNumber;

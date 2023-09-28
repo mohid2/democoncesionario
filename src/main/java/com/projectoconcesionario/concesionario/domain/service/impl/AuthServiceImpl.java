@@ -11,6 +11,8 @@ import com.projectoconcesionario.concesionario.persistance.entity.enums.Role;
 import com.projectoconcesionario.concesionario.persistance.repository.ICustomerRepository;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,25 +33,28 @@ public class AuthServiceImpl implements IAuthService {
 
 
     @Override
-    public AuthResponseDTO register(RegisterRequestDTO request) {
+    public ResponseEntity<?> register(RegisterRequestDTO request) {
         if(!request.getEmail().matches(VALIDAREMAIL)){
             throw new EmailException();
         }
-        if(iCustomerRepository.findByEmail(request.getEmail()).isEmpty()){
+        if(iCustomerRepository.findByEmail(request.getEmail()).isEmpty() && iCustomerRepository.findById(request.getDni()).isEmpty()){
             CustomerEntity customerEntity = CustomerEntity.builder()
                     .dni(request.getDni())
-                    .fullName(request.getFullName())
+                    .firstname(request.getFirstname())
+                    .lastname(request.getLastname())
                     .email(request.getEmail())
                     .phoneNumber(request.getPhoneNumber())
                     .password(passwordEncoder.encode(request.getPassword()))
                     .active(1)
-                    .role(Role.CUSTOMER)
+                    .role(Role.ADMIN)
                     .build();
             iCustomerRepository.save(customerEntity);
             String jwtToken= iJwtService.generateToken(customerEntity,generateExtraClaims(customerEntity));
-            return AuthResponseDTO.builder().message("Se ha registrado con exito").token(jwtToken).build();
+            AuthResponseDTO responseDTO = AuthResponseDTO.builder().message("Se ha registrado con éxito").token(jwtToken).build();
+            return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
         }
-        return AuthResponseDTO.builder().message("El user esta duplicado").build();
+        AuthResponseDTO responseDTO = AuthResponseDTO.builder().message("El usuario está duplicado").build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(responseDTO);
     }
 
     @Override

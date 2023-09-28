@@ -17,7 +17,7 @@ public class CarPurchaseEntity {
     private Integer quantity;
     private Double total;
     @ManyToOne
-    @MapsId(value = "invoiceNumber")
+    @MapsId(value = "purchaseInvoiceNumber")
     @JoinColumn(name = "compra_numero_factura",insertable = false, updatable = false)
     private PurchaseEntity purchaseEntity;
     @ManyToOne

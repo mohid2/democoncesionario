@@ -16,9 +16,6 @@ public interface ICarBrandMapper {
      * @param carBrandEntity de tipo CarBrandEntity
      * @return  CarBrandDTO
      */
-     // Esta annotation si los atributos de la entity y el dto. Se llaman igual se puede omitir
-    @Mapping(source = "id",target = "id")
-    @Mapping(source = "description",target = "description")
     CarBrandDTO carBrandEntityToCarBrandDTO(CarBrandEntity carBrandEntity);
 
     /**

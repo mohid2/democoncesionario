@@ -41,11 +41,11 @@ public class CarController {
     }
 
     @PutMapping()
-    public ResponseEntity<CarDTO> updateCustomer(@RequestBody  CarDTO carDTO){
+    public ResponseEntity<CarDTO> updateCar(@RequestBody  CarDTO carDTO){
         return ResponseEntity.of(iCarService.updateCarDTO(carDTO));
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> deleteCustomer(@PathVariable Integer id ){
+    public ResponseEntity<Boolean> deleteCar(@PathVariable Integer id ){
         return new ResponseEntity<>(iCarService.deleteCar(id) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
