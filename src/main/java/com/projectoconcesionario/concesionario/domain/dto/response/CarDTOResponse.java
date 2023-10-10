@@ -1,8 +1,6 @@
-package com.projectoconcesionario.concesionario.domain.dto;
-
+package com.projectoconcesionario.concesionario.domain.dto.response;
 
 import lombok.*;
-
 
 import java.time.LocalDate;
 @Builder
@@ -10,9 +8,9 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CarDTO {
+public class CarDTOResponse {
     private Integer carCode;
-    private Integer carBrandId;
+    private String carBrandDescription;
     private String reference;
     private Double price;
     private LocalDate modelYear;

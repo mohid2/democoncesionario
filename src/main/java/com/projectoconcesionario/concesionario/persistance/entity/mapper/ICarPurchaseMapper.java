@@ -1,4 +1,4 @@
-package com.projectoconcesionario.concesionario.persistance.mapper;
+package com.projectoconcesionario.concesionario.persistance.entity.mapper;
 
 import com.projectoconcesionario.concesionario.domain.dto.CarPurchaseDTO;
 import com.projectoconcesionario.concesionario.persistance.entity.CarPurchaseEntity;

@@ -1,6 +1,7 @@
 package com.projectoconcesionario.concesionario.controller;
 
 import com.projectoconcesionario.concesionario.domain.dto.CarDTO;
+import com.projectoconcesionario.concesionario.domain.dto.response.CarDTOResponse;
 import com.projectoconcesionario.concesionario.domain.service.ICarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,33 +16,33 @@ import java.util.List;
 public class CarController {
     private final ICarService iCarService;
     @GetMapping
-    public ResponseEntity<List<CarDTO>> getAll(){
+    public ResponseEntity<List<CarDTOResponse>> getAll(){
         return ResponseEntity.ok(iCarService.getAll());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<CarDTO> getCar(@PathVariable Integer id){
+    public ResponseEntity<CarDTOResponse> getCar(@PathVariable Integer id){
         return ResponseEntity.of(iCarService.getCar(id));
     }
     @GetMapping("/marcasid/{carBrandId}")
-    public ResponseEntity<List<CarDTO>> getByCarBrandId(@PathVariable Integer carBrandId){
+    public ResponseEntity<List<CarDTOResponse>> getByCarBrandId(@PathVariable Integer carBrandId){
         return ResponseEntity.ok(iCarService.getByCarBrandId(carBrandId)) ;
     }
     @GetMapping("/marcas/{description}")
-    public ResponseEntity<List<CarDTO>> getAllByCarBrandDescription(@PathVariable String description){
+    public ResponseEntity<List<CarDTOResponse>> getAllByCarBrandDescription(@PathVariable String description){
         return ResponseEntity.ok(iCarService.findAllByCarBrandDescription(description)) ;
     }
     @GetMapping("/precio/{precio}")
-    public ResponseEntity<List<CarDTO>>  getByPriceLessThanEqual(@PathVariable Double precio){
+    public ResponseEntity<List<CarDTOResponse>>  getByPriceLessThanEqual(@PathVariable Double precio){
         return ResponseEntity.ok(iCarService.getByPriceLessThanEqual(precio));
     }
 
     @PostMapping
-    public ResponseEntity<CarDTO> saveCar(@RequestBody CarDTO carDTO){
+    public ResponseEntity<CarDTOResponse> saveCar(@RequestBody CarDTO carDTO){
         return ResponseEntity.status(HttpStatus.CREATED).body(iCarService.saveCar(carDTO));
     }
 
     @PutMapping()
-    public ResponseEntity<CarDTO> updateCar(@RequestBody  CarDTO carDTO){
+    public ResponseEntity<CarDTOResponse> updateCar(@RequestBody  CarDTO carDTO){
         return ResponseEntity.of(iCarService.updateCarDTO(carDTO));
     }
     @DeleteMapping("/{id}")

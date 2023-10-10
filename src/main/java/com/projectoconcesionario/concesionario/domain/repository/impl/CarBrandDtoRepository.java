@@ -2,7 +2,7 @@ package com.projectoconcesionario.concesionario.domain.repository.impl;
 
 import com.projectoconcesionario.concesionario.domain.dto.CarBrandDTO;
 import com.projectoconcesionario.concesionario.domain.repository.ICarBrandDtoRepository;
-import com.projectoconcesionario.concesionario.persistance.mapper.ICarBrandMapper;
+import com.projectoconcesionario.concesionario.persistance.entity.mapper.ICarBrandMapper;
 import com.projectoconcesionario.concesionario.persistance.repository.ICarBrandRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

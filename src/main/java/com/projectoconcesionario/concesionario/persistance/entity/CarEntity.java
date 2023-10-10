@@ -1,11 +1,9 @@
 package com.projectoconcesionario.concesionario.persistance.entity;
 
 
-import com.projectoconcesionario.concesionario.persistance.entity.enums.TractionType;
-import com.projectoconcesionario.concesionario.persistance.entity.enums.TransmissionType;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -29,6 +27,7 @@ public class CarEntity {
     @Column(name = "precio")
     private Double price;
     @Column(name = "anio_modelo")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate modelYear;
     @Column(name = "color")
     private String color;
@@ -39,16 +38,14 @@ public class CarEntity {
     @Column(name = "cilindraje")
     private Double engineDisplacement;
     @Basic(fetch = FetchType.LAZY)
-    @Enumerated(EnumType.STRING)
     @Column(name = "transmision")
-    private TransmissionType transmission;
+    private String transmission;
     @Column(name = "tipo_cumbustible")
     private String fuelType;
     @Column(name = "cantidad_asientos")
     private Integer numberSeat;
-    @Enumerated(EnumType.STRING)
     @Column(name = "traccion")
-    private TractionType traction;
+    private String traction;
     @Column(name = "direccion")
     private String steering;
     @Column(name = "categoria")
@@ -57,7 +54,7 @@ public class CarEntity {
     private String imagePath;
 
     @ManyToOne
-    @JoinColumn(name = "marca_coche_id",insertable = false,updatable = false)
+    @JoinColumn(name = "marca_cocheid",insertable = false,updatable = false)
     private CarBrandEntity carBrandEntity;
 
     @OneToMany(mappedBy = "carEntity",cascade = CascadeType.ALL)

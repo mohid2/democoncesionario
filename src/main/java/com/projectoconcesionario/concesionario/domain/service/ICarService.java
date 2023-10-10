@@ -1,7 +1,7 @@
 package com.projectoconcesionario.concesionario.domain.service;
 
 import com.projectoconcesionario.concesionario.domain.dto.CarDTO;
-import com.projectoconcesionario.concesionario.domain.dto.CustomerDTO;
+import com.projectoconcesionario.concesionario.domain.dto.response.CarDTOResponse;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +11,7 @@ public interface ICarService {
      * Devuelve un lista de  coches
      * @return lista  coches
      */
-    List<CarDTO> getAll();
+    List<CarDTOResponse> getAll();
 
     /**
      * Devueleve una coche dado su id
@@ -19,14 +19,14 @@ public interface ICarService {
      * @return Optional de coche encontrado
      */
 
-    Optional<CarDTO> getCar(Integer id);
+    Optional<CarDTOResponse> getCar(Integer id);
 
     /**
      *
      * @param id
      * @return
      */
-    List<CarDTO> getByCarBrandId(Integer id);
+    List<CarDTOResponse> getByCarBrandId(Integer id);
 
     /**
      *
@@ -34,14 +34,14 @@ public interface ICarService {
      * @return
      */
 
-    List<CarDTO> findAllByCarBrandDescription(String id);
+    List<CarDTOResponse> findAllByCarBrandDescription(String id);
 
     /**
      *
      * @param price
      * @return
      */
-    List<CarDTO> getByPriceLessThanEqual(Double price);
+    List<CarDTOResponse> getByPriceLessThanEqual(Double price);
 
 
     /**
@@ -49,14 +49,14 @@ public interface ICarService {
      * @param carDTO coche a Guardar o actualiza
      * @return  coche  Guardada o actualizada
      */
-    CarDTO saveCar(CarDTO carDTO );
+    CarDTOResponse saveCar(CarDTO carDTO );
 
     /**
      *
      * @param carDTO
      * @return
      */
-    Optional<CarDTO>  updateCarDTO(CarDTO carDTO);
+    Optional<CarDTOResponse>  updateCarDTO(CarDTO carDTO);
 
     /**
      * Elimina un coche dada su id

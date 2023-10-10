@@ -1,6 +1,7 @@
 package com.projectoconcesionario.concesionario.domain.service.impl;
 
 import com.projectoconcesionario.concesionario.domain.dto.CarDTO;
+import com.projectoconcesionario.concesionario.domain.dto.response.CarDTOResponse;
 import com.projectoconcesionario.concesionario.domain.repository.ICarDtoRepository;
 import com.projectoconcesionario.concesionario.domain.service.ICarService;
 import lombok.RequiredArgsConstructor;
@@ -14,37 +15,38 @@ public class CarServiceImpl implements ICarService {
 
     private final ICarDtoRepository iCarDtoRepository;
     @Override
-    public List<CarDTO> getAll() {
+    public List<CarDTOResponse> getAll() {
         return iCarDtoRepository.getAll();
     }
 
     @Override
-    public Optional<CarDTO> getCar(Integer id) {
+    public Optional<CarDTOResponse> getCar(Integer id) {
         return iCarDtoRepository.getCar(id);
     }
 
     @Override
-    public List<CarDTO> getByCarBrandId(Integer id) {
+    public List<CarDTOResponse> getByCarBrandId(Integer id) {
         return iCarDtoRepository.getByCarBrandId(id);
     }
 
     @Override
-    public List<CarDTO> findAllByCarBrandDescription(String description) {
+    public List<CarDTOResponse> findAllByCarBrandDescription(String description) {
         return iCarDtoRepository.findAllByCarBrandDescription(description);
     }
 
     @Override
-    public List<CarDTO> getByPriceLessThanEqual(Double price) {
+    public List<CarDTOResponse> getByPriceLessThanEqual(Double price) {
         return iCarDtoRepository.getByPriceLessThanEqual(price);
     }
 
     @Override
-    public CarDTO saveCar(CarDTO carDTO) {
+    public CarDTOResponse saveCar(CarDTO carDTO) {
+
         return iCarDtoRepository.saveCar(carDTO);
     }
 
     @Override
-    public Optional<CarDTO> updateCarDTO(CarDTO carDTO) {
+    public Optional<CarDTOResponse> updateCarDTO(CarDTO carDTO) {
         if (iCarDtoRepository.getCar(carDTO.getCarCode()).isPresent()){
             return Optional.of(iCarDtoRepository.saveCar(carDTO));
         }

@@ -1,8 +1,8 @@
-package com.projectoconcesionario.concesionario.persistance.mapper;
+package com.projectoconcesionario.concesionario.persistance.entity.mapper;
 
-import com.projectoconcesionario.concesionario.domain.dto.CarBrandDTO;
+
 import com.projectoconcesionario.concesionario.domain.dto.CarDTO;
-import com.projectoconcesionario.concesionario.persistance.entity.CarBrandEntity;
+
 import com.projectoconcesionario.concesionario.persistance.entity.CarEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

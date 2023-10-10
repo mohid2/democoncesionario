@@ -3,7 +3,7 @@ package com.projectoconcesionario.concesionario.domain.repository.impl;
 import com.projectoconcesionario.concesionario.domain.dto.CustomerDTO;
 import com.projectoconcesionario.concesionario.domain.repository.ICustomerDtoRepository;
 import com.projectoconcesionario.concesionario.persistance.entity.CustomerEntity;
-import com.projectoconcesionario.concesionario.persistance.mapper.ICustomerMapper;
+import com.projectoconcesionario.concesionario.persistance.entity.mapper.ICustomerMapper;
 import com.projectoconcesionario.concesionario.persistance.repository.ICustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

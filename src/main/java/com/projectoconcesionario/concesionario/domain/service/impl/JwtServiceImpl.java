@@ -18,7 +18,7 @@ import java.util.function.Function;
 public class JwtServiceImpl implements IJwtService {
 
     private static final String SECRET_KEY = "64d5113480588d2c99cfb9f74c5cfd12e23ce08c705d9da1b870a9409f79f340";
-    private static final Long EXPIRATION_DATE  = 1800000L;
+    private static final Long EXPIRATION_DATE  = 9045000L;
 
 
     public String generateToken( UserDetails userDetails,Map<String,Object> extraClaims){

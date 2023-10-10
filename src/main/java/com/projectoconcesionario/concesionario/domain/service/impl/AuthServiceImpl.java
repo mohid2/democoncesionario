@@ -50,10 +50,10 @@ public class AuthServiceImpl implements IAuthService {
                     .build();
             iCustomerRepository.save(customerEntity);
             String jwtToken= iJwtService.generateToken(customerEntity,generateExtraClaims(customerEntity));
-            AuthResponseDTO responseDTO = AuthResponseDTO.builder().message("Se ha registrado con éxito").token(jwtToken).build();
+            AuthResponseDTO responseDTO = AuthResponseDTO.builder().message("Successfully registered.").token(jwtToken).build();
             return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
         }
-        AuthResponseDTO responseDTO = AuthResponseDTO.builder().message("El usuario está duplicado").build();
+        AuthResponseDTO responseDTO = AuthResponseDTO.builder().message("Duplicated user.").build();
         return ResponseEntity.status(HttpStatus.CONFLICT).body(responseDTO);
     }
 
@@ -69,6 +69,8 @@ public class AuthServiceImpl implements IAuthService {
 
     private Map<String,Object> generateExtraClaims(CustomerEntity user) {
         Map<String,Object> extraClaims= new HashMap<>();
+        extraClaims.put("firstname",user.getFirstname());
+        extraClaims.put("lastname",user.getLastname());
         extraClaims.put("role",user.getRole());
         return extraClaims;
     }
