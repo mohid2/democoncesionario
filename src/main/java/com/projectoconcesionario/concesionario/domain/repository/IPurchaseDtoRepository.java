@@ -2,6 +2,7 @@ package com.projectoconcesionario.concesionario.domain.repository;
 
 import com.projectoconcesionario.concesionario.domain.dto.CarDTO;
 import com.projectoconcesionario.concesionario.domain.dto.PurchaseDTO;
+import com.projectoconcesionario.concesionario.domain.dto.response.PurchaseResponseDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +24,7 @@ public interface IPurchaseDtoRepository {
      * @param purchaseDTO  coche a Guardar o actualiza
      * @return  coche  Guardada o actualizada
      */
-    PurchaseDTO savePurchase(PurchaseDTO purchaseDTO );
+    PurchaseResponseDTO savePurchase(PurchaseDTO purchaseDTO );
 
     /**
      * Elimina un coche dada su id

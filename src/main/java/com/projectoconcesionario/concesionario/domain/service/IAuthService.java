@@ -6,6 +6,7 @@ import com.projectoconcesionario.concesionario.domain.dto.response.AuthResponseD
 import org.springframework.http.ResponseEntity;
 
 public interface IAuthService {
-    ResponseEntity<?> register(RegisterRequestDTO request);
+    ResponseEntity<AuthResponseDTO> register(RegisterRequestDTO request);
     AuthResponseDTO login(LoginRequestDTO request);
+    AuthResponseDTO logout(String request);
 }

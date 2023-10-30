@@ -2,6 +2,7 @@ package com.projectoconcesionario.concesionario.domain.service;
 
 
 import com.projectoconcesionario.concesionario.domain.dto.PurchaseDTO;
+import com.projectoconcesionario.concesionario.domain.dto.response.PurchaseResponseDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,10 +15,10 @@ public interface IPurchaseService {
 
     Optional<PurchaseDTO> getPurchaseDTO(Integer invoiceNumber);
 
-    PurchaseDTO savePurchaseDTO(PurchaseDTO purchaseDTO );
+    PurchaseResponseDTO savePurchaseDTO(PurchaseDTO purchaseDTO );
 
 
-    Optional<PurchaseDTO>  updatePurchaseDTO(PurchaseDTO purchaseDTO );
+    Optional<PurchaseResponseDTO>  updatePurchaseDTO(PurchaseDTO purchaseDTO );
 
 
     boolean deletePurchaseDTO(Integer invoiceNumber);

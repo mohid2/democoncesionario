@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -15,7 +17,10 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "coches")
-public class CarEntity {
+public class CarEntity implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1671320768031045626L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo_coche")

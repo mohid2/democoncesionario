@@ -3,6 +3,7 @@ package com.projectoconcesionario.concesionario.controller;
 import com.projectoconcesionario.concesionario.domain.dto.CarDTO;
 import com.projectoconcesionario.concesionario.domain.dto.response.CarDTOResponse;
 import com.projectoconcesionario.concesionario.domain.service.ICarService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
+@Transactional
 @RequestMapping("/api/coches")
 public class CarController {
     private final ICarService iCarService;

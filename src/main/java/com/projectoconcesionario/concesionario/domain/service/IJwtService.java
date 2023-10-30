@@ -13,4 +13,5 @@ public interface IJwtService {
     String getUserEmailForToken(String token);
     boolean isTokenValid(String token, UserDetails userDetails);
     <T> T getClaim(String token, Function<Claims,T> claimsResolver);
+    String deleteToken(String jwt);
 }

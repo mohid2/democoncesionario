@@ -33,7 +33,7 @@ public class AuthServiceImpl implements IAuthService {
 
 
     @Override
-    public ResponseEntity<?> register(RegisterRequestDTO request) {
+    public ResponseEntity<AuthResponseDTO> register(RegisterRequestDTO request) {
         if(!request.getEmail().matches(VALIDAREMAIL)){
             throw new EmailException();
         }
@@ -64,7 +64,21 @@ public class AuthServiceImpl implements IAuthService {
         );
          CustomerEntity customerEntity = iCustomerRepository.findByEmail(request.getEmail()).orElseThrow();
             String jwtToken= iJwtService.generateToken(customerEntity,generateExtraClaims(customerEntity));
-            return AuthResponseDTO.builder().message("Se ha autenticado con exito").token(jwtToken).build();
+            return AuthResponseDTO.builder().message("Successfully authenticated.").token(jwtToken).build();
+    }
+
+    @Override
+    public AuthResponseDTO logout(String request) {
+        String[] authElements = request.split(" ");
+        String token = null;
+        for (int i = 0; i < authElements.length; i++) {
+            if (authElements[i].equals("Bearer")) {
+                token = authElements[i+1];
+                break;
+            }
+        }
+        String mensaje = iJwtService.deleteToken(token);
+        return AuthResponseDTO.builder().message(mensaje).build();
     }
 
     private Map<String,Object> generateExtraClaims(CustomerEntity user) {
@@ -72,6 +86,7 @@ public class AuthServiceImpl implements IAuthService {
         extraClaims.put("firstname",user.getFirstname());
         extraClaims.put("lastname",user.getLastname());
         extraClaims.put("role",user.getRole());
+        extraClaims.put("dni",user.getDni());
         return extraClaims;
     }
 }

@@ -1,8 +1,11 @@
 package com.projectoconcesionario.concesionario.persistance.entity.mapper;
 
 import com.projectoconcesionario.concesionario.domain.dto.CarPurchaseDTO;
+import com.projectoconcesionario.concesionario.domain.dto.response.CarPurchaseResponseDTO;
 import com.projectoconcesionario.concesionario.persistance.entity.CarPurchaseEntity;
 import org.mapstruct.*;
+
+import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ICarPurchaseMapper {
@@ -15,4 +18,5 @@ public interface ICarPurchaseMapper {
     @Mapping(source = "id.purchaseInvoiceNumber", target = "invoiceNumber")
     @Mapping(source = "id.carCode", target = "carCode")
     CarPurchaseDTO carPurchaseEntitytoDToCarPurchaseDTO(CarPurchaseEntity carPurchaseEntity);
+
 }

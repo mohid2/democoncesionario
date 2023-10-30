@@ -1,6 +1,7 @@
 package com.projectoconcesionario.concesionario.domain.service.impl;
 
 import com.projectoconcesionario.concesionario.domain.dto.PurchaseDTO;
+import com.projectoconcesionario.concesionario.domain.dto.response.PurchaseResponseDTO;
 import com.projectoconcesionario.concesionario.domain.repository.IPurchaseDtoRepository;
 import com.projectoconcesionario.concesionario.domain.service.IPurchaseService;
 import lombok.RequiredArgsConstructor;
@@ -25,12 +26,12 @@ public class PurchaseServiceImpl implements IPurchaseService {
     }
 
     @Override
-    public PurchaseDTO savePurchaseDTO(PurchaseDTO purchaseDTO) {
+    public PurchaseResponseDTO savePurchaseDTO(PurchaseDTO purchaseDTO) {
         return iPurchaseDtoRepository.savePurchase(purchaseDTO);
     }
 
     @Override
-    public Optional<PurchaseDTO> updatePurchaseDTO(PurchaseDTO purchaseDTO) {
+    public Optional<PurchaseResponseDTO> updatePurchaseDTO(PurchaseDTO purchaseDTO) {
         if (iPurchaseDtoRepository.getPurchase(purchaseDTO.getInvoiceNumber()).isPresent()){
             return Optional.of(iPurchaseDtoRepository.savePurchase(purchaseDTO));
         }

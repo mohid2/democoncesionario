@@ -1,7 +1,6 @@
 package com.projectoconcesionario.concesionario.controller;
-
-import com.projectoconcesionario.concesionario.domain.dto.CarDTO;
 import com.projectoconcesionario.concesionario.domain.dto.PurchaseDTO;
+import com.projectoconcesionario.concesionario.domain.dto.response.PurchaseResponseDTO;
 import com.projectoconcesionario.concesionario.domain.service.IPurchaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,12 +25,12 @@ public class PurchaseController {
     }
 
     @PostMapping
-    public ResponseEntity<PurchaseDTO> PurchaseSave(@RequestBody PurchaseDTO purchaseDTO){
+    public ResponseEntity<PurchaseResponseDTO> purchaseSave(@RequestBody PurchaseDTO purchaseDTO){
         return ResponseEntity.status(HttpStatus.CREATED).body(iPurchaseService.savePurchaseDTO(purchaseDTO));
     }
 
     @PutMapping()
-    public ResponseEntity<PurchaseDTO> updatePurchase(@RequestBody PurchaseDTO purchaseDTO){
+    public ResponseEntity<PurchaseResponseDTO> updatePurchase(@RequestBody PurchaseDTO purchaseDTO){
         return ResponseEntity.of(iPurchaseService.updatePurchaseDTO(purchaseDTO));
     }
     @DeleteMapping("/{id}")

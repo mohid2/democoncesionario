@@ -7,10 +7,7 @@ import com.projectoconcesionario.concesionario.domain.service.IAuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,9 +19,12 @@ public class AuthController {
     public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginRequestDTO request){
         return ResponseEntity.ok(authService.login(request)) ;
     }
-
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequestDTO request){
+    public ResponseEntity<AuthResponseDTO> register(@RequestBody RegisterRequestDTO request){
         return authService.register(request);
+    }
+    @PostMapping("/logout")
+    public ResponseEntity<AuthResponseDTO> logout(@RequestHeader("Authorization") String authorizationHeader){
+        return ResponseEntity.ok(authService.logout(authorizationHeader));
     }
 }

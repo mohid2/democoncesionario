@@ -10,6 +10,7 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
+@ToString
 public class PurchaseResponseDTO {
     private Integer invoiceNumber;
     private String customerDni;

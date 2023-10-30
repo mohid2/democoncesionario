@@ -19,10 +19,12 @@ public class JwtServiceImpl implements IJwtService {
 
     private static final String SECRET_KEY = "64d5113480588d2c99cfb9f74c5cfd12e23ce08c705d9da1b870a9409f79f340";
     private static final Long EXPIRATION_DATE  = 9045000L;
+    private final HashMap<String, UserDetails> listToken = new HashMap<>();
 
 
     public String generateToken( UserDetails userDetails,Map<String,Object> extraClaims){
-        return Jwts.builder()
+
+        String tokenCreated = Jwts.builder()
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
@@ -30,6 +32,8 @@ public class JwtServiceImpl implements IJwtService {
                 .setHeaderParam(Header.TYPE,Header.JWT_TYPE)
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
+        listToken.put(tokenCreated,userDetails);
+        return tokenCreated;
     }
 
     private Key getKey() {
@@ -55,6 +59,15 @@ public class JwtServiceImpl implements IJwtService {
         final Claims claims = getAllClaims(token);
         return claimsResolver.apply(claims);
         
+    }
+
+    @Override
+    public String deleteToken(String jwt) {
+        if (!listToken.containsKey(jwt)) {
+            return "No existe token";
+        }
+        listToken.remove(jwt);
+        return "Successfully authenticated.";
     }
 
     private Claims getAllClaims(String token) {

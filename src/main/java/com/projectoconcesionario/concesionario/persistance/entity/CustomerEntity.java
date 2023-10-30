@@ -7,6 +7,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
@@ -19,7 +21,10 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "clientes")
-public class CustomerEntity implements UserDetails {
+public class CustomerEntity implements UserDetails, Serializable {
+    @Serial
+    private static final long serialVersionUID = -6196622178756080206L;
+
     @Id
     private String dni;
     @Column(name = "nombre")

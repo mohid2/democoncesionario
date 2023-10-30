@@ -52,7 +52,7 @@ public class SecurityConfig {
     private Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> getAuthorizationManagerRequestMatcherRegistryCustomizer() {
         return request -> request.requestMatchers(publicEndpoints()).permitAll()
                 .requestMatchers(HttpMethod.GET, "/clientes/**").hasAnyRole(Role.ADMIN.name(),Role.CUSTOMER.name())
-                .requestMatchers(HttpMethod.DELETE, "/clientes/**").hasRole(Role.ADMIN.name())
+                //.requestMatchers(HttpMethod.DELETE, "/clientes/**").hasRole(Role.ADMIN.name())
                 .requestMatchers(HttpMethod.GET, "/coches/**").hasAnyRole(Role.ADMIN.name(), Role.CUSTOMER.name())
                 .requestMatchers(HttpMethod.POST, "/coches/**").hasRole(Role.ADMIN.name())
                 //solo toma el primer filtro, ya no se puede anidar un rol con una autoridad
@@ -76,7 +76,8 @@ public class SecurityConfig {
                 new AntPathRequestMatcher("/swagger-ui/**"),
                 new AntPathRequestMatcher("/v3/api-docs/**"),
                 new AntPathRequestMatcher("/api/auth/**"),
-                new AntPathRequestMatcher("/error")
+                new AntPathRequestMatcher("/error"),
+                new AntPathRequestMatcher("/api/coches/**")
         );
     }
 

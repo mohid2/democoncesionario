@@ -23,9 +23,9 @@ public class CustomerController {
 
     /**
      *
-     * @return
+     * @return lista CustomerDTO
      */
-    @PreAuthorize("hasAuthority('CUSTOMER')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/clientes")
     public ResponseEntity<List<CustomerDTO>> getAll(){
         return ResponseEntity.ok(iCustomerService.getAll());
@@ -33,10 +33,10 @@ public class CustomerController {
 
     /**
      *
-     * @param id
-     * @return
+     * @param id del Customer a buscar
+     * @return CustomerDTO
      */
-
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CUSTOMER')")
     @GetMapping("/clientes/{id}")
     public ResponseEntity<CustomerDTO> getCustomer(@PathVariable String id){
         return ResponseEntity.of(iCustomerService.getCustomerDTO(id));
@@ -44,17 +44,18 @@ public class CustomerController {
 
     /**
      *
-     * @param email
-     * @return
+     * @param email del Customer a buscar
+     * @return CustomerDTO
      */
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
     @GetMapping("/clientes/v1/{email}")
     public ResponseEntity<CustomerDTO> getCustomerByEmail(@PathVariable String email){
         return ResponseEntity.of(iCustomerService.getCustomerDTOByEmail(email));
     }
     /**
      *
-     * @param customerDTO
-     * @return
+     * @param customerDTO del Customer a actualizar
+     * @return CustomerDTO
      */
 
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -65,8 +66,8 @@ public class CustomerController {
 
     /**
      *
-     * @param dni
-     * @return
+     * @param dni del Customer a borrar
+     * @return Boolean
      */
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/clientes/{id}")
