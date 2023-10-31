@@ -34,10 +34,5 @@ public interface ICarBrandMapper {
      */
     List<CarBrandDTO> carsBrandEntityToCarsBrandDTO(List<CarBrandEntity> carsBrandEntities);
 
-    /**
-     * transformar una lista de tipo CarBrandDTO  a una lista CarBrandEntity
-     * @param carsBrandDTO  lista a transformar de tipo CarBrandDTO
-     * @return una lista de tipo CarBrandEntity
-     */
-    List<CarBrandEntity> carsBrandDTOToCarsBrandEntity(List<CarBrandDTO> carsBrandDTO);
+
 }
