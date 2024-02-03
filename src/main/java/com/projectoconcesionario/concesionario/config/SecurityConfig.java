@@ -4,8 +4,10 @@ package com.projectoconcesionario.concesionario.config;
 import com.projectoconcesionario.concesionario.config.filter.JwtAuthenticationFilter;
 import com.projectoconcesionario.concesionario.persistance.entity.enums.Role;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.Customizer;
@@ -23,6 +25,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 
 import java.util.Arrays;
@@ -41,7 +44,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(withDefaults())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
@@ -71,6 +74,7 @@ public class SecurityConfig {
         return source;
     }
 
+
     private RequestMatcher publicEndpoints() {
         return new OrRequestMatcher(
                 new AntPathRequestMatcher("/swagger-ui/**"),
@@ -80,7 +84,13 @@ public class SecurityConfig {
                 new AntPathRequestMatcher("/api/coches/**")
         );
     }
-
+    @Bean
+    FilterRegistrationBean<CorsFilter> corsFilterFilterRegistrationBean(){
+        FilterRegistrationBean<CorsFilter> corsFilter =
+                new FilterRegistrationBean<>(new CorsFilter(corsConfigurationSource()));
+        corsFilter.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return corsFilter;
+    }
 
 
 }
